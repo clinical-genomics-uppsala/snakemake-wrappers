@@ -5,10 +5,10 @@ __license__ = "MIT"
 
 from snakemake.shell import shell
 
-path_gatk = snakemake.params.get("gatk_with_amplicon_mapping")
+path_gatk = snakemake.params.get("path_gatk")
 
-if path_jsnpmania is None:
-    raise ValueError("path to jsnpmania cannot be empty")
+if path_gatk is None:
+    raise ValueError("path to gatk cannot be empty")
 
 genome_ref = snakemake.params.get("genome_ref")
 
@@ -21,14 +21,11 @@ if design_file is None:
     raise ValueError("A design file, contain amplicon in bed format, must be provded")
 
 shell(
- "samtools view -h -b -F 0x100 {snakemake.input} | " +
- "samtools sort -n -@ 3 /dev/stdin /dev/stdout | " +
  "java -jar " + path_gatk + " " +
  "-T MapReadToAmpliconsIlluminaReadPair " +
  "-R " + genome_ref + " " +
- "-I /dev/stdin " +
- "-o {snakemake.outout.bed} " +
- "-fragments " design_file + " " +
- "-ampAnReads /dev/stdout " +
- "-U ALL -nonunique -allowPotentiallyMisencodedQuals --downsample_to_coverage 90000 -molBarCode 0 | " +
- "samtool sort -@ 3 /dev/stdin {snakemake.output.bam}")
+ "-I {snakemake.input} " +
+ "-o {snakemake.output.bed} " +
+ "-fragments " + design_file + " " +
+ "-ampAnReads {snakemake.output.bam} " +
+ "-U ALL -nonunique -allowPotentiallyMisencodedQuals --downsample_to_coverage 90000 -molBarCode 0")

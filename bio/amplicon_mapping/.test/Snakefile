@@ -1,0 +1,12 @@
+rule amplicon_mapping:
+    input:
+        "{sample}.bam"
+    output:
+        bam = "{sample}.amplicon_mapped.bam",
+        bed = "{sample}.amplicon_mapped.bed"
+    params:
+        path_gatk = "/GenomeAnalysisTKLite_molecules.jar",
+        genome_ref = "/hg19.with.mt.fasta",
+        design_file = "/DiagnosticPanel_Lung_20160222.selection.bed"
+    wrapper:
+        "master/bio/amplicon_mapping"
