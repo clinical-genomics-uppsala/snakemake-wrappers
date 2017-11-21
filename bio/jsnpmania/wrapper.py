@@ -5,6 +5,8 @@ __license__ = "MIT"
 
 from snakemake.shell import shell
 
+log = snakemake.log_fmt_shell(stdout=false, stderr=True)
+
 path_jsnpmania = snakemake.params.get("path_jsnpmania")
 
 if path_jsnpmania is None:
@@ -24,4 +26,5 @@ shell(
     "-od {snakemake.output.deletions} " +
     "-r {snakemake.params.ref_file} " +
     "-am {snakemake.params.flags} " +
+    "{log}"
 )
