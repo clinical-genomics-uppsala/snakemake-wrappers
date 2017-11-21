@@ -7,8 +7,8 @@ from snakemake.shell import shell
 
 if snakemake.params.get("remove_secondary_alignment",False):
     command = "samtools view -h -b -F 0x100 {snakemake.input} | " + \
-              "samtools sort -n -@ 3 /dev/stdin > {snakemake.output.bam}"
+              "samtools sort -n -@ {snakemake.threads} /dev/stdin > {snakemake.output.bam}"
 else:
-    command = "samtools sort -n -@ 3 {snakemake.input} > {snakemake.output.bam}"
+    command = "samtools sort -n -@ {snakemake.threads} {snakemake.input} > {snakemake.output.bam}"
 
 shell(command)

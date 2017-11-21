@@ -1,9 +1,0 @@
-rule coordinate_sort:
-    input:
-        "{sample}.bam"
-    output:
-        bam = "{sample}.coordinate_sorted.bam",
-    params:
-        ""
-    wrapper:
-        "master/bio/sort/coordinate"
