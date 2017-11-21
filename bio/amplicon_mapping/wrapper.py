@@ -5,7 +5,7 @@ __license__ = "MIT"
 
 from snakemake.shell import shell
 
-log = snakemake.log_fmt_shell(stdout=False, stderr=True)
+log = snakemake.log_fmt_shell(stdout=false, stderr=True)
 
 path_gatk = snakemake.params.get("path_gatk")
 
@@ -30,4 +30,9 @@ shell(
  "-o {snakemake.output.bed} " +
  "-fragments " + design_file + " " +
  "-ampAnReads {snakemake.output.bam} " +
- "-U ALL -nonunique -allowPotentiallyMisencodedQuals --downsample_to_coverage 90000 -molBarCode 0 {log}")
+ "-U ALL " +
+ "-nonunique " +
+ "-allowPotentiallyMisencodedQuals " +
+ "--downsample_to_coverage 90000 " +
+ "-molBarCode 0 " +
+ "{log}")
