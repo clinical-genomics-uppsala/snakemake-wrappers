@@ -35,10 +35,6 @@ def test_queryname_sort():
     run("bio/sort/queryname",
         ["snakemake", "a.queryname_sorted.bam", "--verbose", "--use-conda", "-F"])
 
-def test_coordinate_sort():
-    run("bio/sort/coordinate",
-        ["snakemake", "a.coordinate_sorted.bam", "--verbose", "--use-conda", "-F"])
-
 # Need to add dependencies to run this
 #def test_amplicon_mapping():
 #    run("bio/amplicon_mapping",
