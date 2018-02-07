@@ -25,6 +25,6 @@ shell(
     "-oi {snakemake.output.insertions} " +
     "-od {snakemake.output.deletions} " +
     "-r {snakemake.params.ref_file} " +
-    "-am {snakemake.params.flags} " +
+    " {snakemake.params.flags} " +
     "{log}"
 )
