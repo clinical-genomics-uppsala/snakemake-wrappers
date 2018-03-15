@@ -20,7 +20,7 @@ if path_jsnpmania_header is None:
 shell(
  "samtools reheader " + path_jsnpmania_header + " {snakemake.input} | " +
  "samtools view /dev/stdin | " +
- path_jsnpmania + " jSNPMania.sh -i /dev/stdin " +
+ path_jsnpmania + " -i /dev/stdin " +
     "-o {snakemake.output.variations} " +
     "-oi {snakemake.output.insertions} " +
     "-od {snakemake.output.deletions} " +
