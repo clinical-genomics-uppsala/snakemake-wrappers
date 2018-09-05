@@ -1,0 +1,4 @@
+name: jSNPmania
+description: Generate variants from bam files
+authors:
+  - Patrik Smeds
