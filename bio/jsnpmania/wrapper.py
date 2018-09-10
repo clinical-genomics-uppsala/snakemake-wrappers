@@ -7,11 +7,6 @@ from snakemake.shell import shell
 
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
-path_jsnpmania = snakemake.params.get("path_jsnpmania")
-
-if path_jsnpmania is None:
-    raise ValueError("path to jsnpmania cannot be empty")
-
 path_jsnpmania_header = snakemake.params.get("path_jsnpmania_header")
 
 if path_jsnpmania_header is None:
@@ -20,8 +15,7 @@ if path_jsnpmania_header is None:
 shell(
  "samtools reheader " + path_jsnpmania_header + " {snakemake.input} | " +
  "samtools view /dev/stdin | " +
- path_jsnpmania + " -i /dev/stdin " +
-    "-o {snakemake.output.variations} " +
+ "JSNPmania.v2.sh -i /dev/stdin " + "-o {snakemake.output.variations} " +
     "-oi {snakemake.output.insertions} " +
     "-od {snakemake.output.deletions} " +
     "-r {snakemake.params.ref_file} " +

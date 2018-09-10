@@ -7,11 +7,6 @@ from snakemake.shell import shell
 
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
-path_gatk = snakemake.params.get("path_gatk")
-
-if path_gatk is None:
-    raise ValueError("path to gatk cannot be empty")
-
 genome_ref = snakemake.params.get("genome_ref")
 
 if genome_ref is None:
@@ -23,7 +18,7 @@ if design_file is None:
     raise ValueError("A design file, contain amplicon in bed format, must be provded")
 
 shell(
- "java -jar " + path_gatk + " " +
+ "AmpliconMapping.sh " +
  "-T MapReadToAmpliconsIlluminaReadPair " +
  "-R " + genome_ref + " " +
  "-I {snakemake.input} " +
